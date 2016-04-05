@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  title: Test Sessions Tracker API
+  description: Move your app forward with the Uber API
+  version: "0.0.1"
+host: 127.0.0.1
+schemes:
+  - http
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /session:
+    get:
+      summary: Get current session
+      responses:
+        200:
+          description: An object of the current session
+          schema:
+            $ref: '#/definitions/Session'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a new session
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/NewSession"
+      responses:
+        201:
+          description: The session was created
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+        
+definitions:
+  Session:
+    type: object
+    properties:
+      id:
+        type: string
+      area:
+        type: string
+        description: don't forget to write the description :P
+      charter:
+        type: string
+      tester:
+        type: string
+      environment:
+        type: string
+  NewSession:
+    type: object
+    properties:
+      area:
+        type: string
+        description: don't forget to write the description :P
+      charter:
+        type: string
+      tester:
+        type: string
+      environment:
+        type: string
+  Error:
+    type: string
+    
